@@ -1,0 +1,63 @@
+<ion-view view-title="City">
+  <ion-nav-buttons side="right">
+    <div class="buttons">
+      <button ng-if="things.indexOf(cityId) === -1 && cityId != null" ng-click="add(cityId)" class="button button-icon icon ion-plus"></button>
+      <button ng-if="things.indexOf(cityId) != -1 && cityId != null" ng-click="remove(cityId)" class="button button-icon icon ion-trash-a"></button>
+    </div>
+  </ion-nav-buttons>
+  <ion-content>
+    <ion-refresher
+    pulling-text="Pull to refresh..."
+    on-refresh="doRefresh()">
+  </ion-refresher>
+  <div ng-if="showData">
+    <h3><reverse-geocode lat={{latitude}} lng={{longitude}}></reverse-geocode></h3>
+    <h1>{{current.currently.temperature}} &deg;
+
+    <h5><b>Today's forecast : </b></h5> {{current.hourly.summary}}
+
+    <ion-scroll direction="x">
+      <div id="content">
+      <div class="item item1" ng-repeat="hourData in current.hourly.data">
+        {{hourData.time * 1000 | date:'HH:mm'}} </br>
+        {{hourData.temperature}}
+      </div>
+    </div>
+    </ion-scroll>
+
+    </br>
+
+    <h5><span class="large"><b>Next week's forecast : </b></span></br></h5>
+    <span class="large">{{current.daily.summary}}</span></br></br>
+
+    <div class="row header">
+      <div class="col">Day</div>
+      <div class="col">Min</div>
+      <div class="col">Max</div>
+    </div>
+
+
+    <div class="row item" ng-repeat="dayData in current.daily.data">
+      <div class="col">{{days[$index] | date : 'EEE'}}</div>
+      <div class="col">{{dayData.temperatureMin}}</div>
+      <div class="col">{{dayData.temperatureMax}}</div>
+    </div>
+
+  </br>
+  </br>
+  </br>
+
+  </div>
+  <div ng-if="showData != true">
+    <div class="card">
+      <div class="item item-text-wrap">
+        <pre>{{screenMessage}}</pre>
+      </div>
+    </div>
+  </div>
+
+</ion-content>
+<ion-footer-bar align-title="center" class="bar-calm" ng-if="showData == true" ng-click="shareAnywhere()">
+  <h1 class="title">Share</h1>
+</ion-footer-bar>
+</ion-view>

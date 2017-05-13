@@ -1,0 +1,24 @@
+<ion-view view-title="Favorites Cities">
+  <ion-content>
+    <ion-list>
+      <ion-item ng-repeat="cityId in things" href="#/app/cities/{{cityId}}">
+          {{cities.get(cityId).name}}
+      </ion-item>
+    </ion-list>
+    <div class="card"  ng-hide="things.length">
+      <div class="item item-text-wrap">
+        <pre>No city in your favirote list</pre>
+      </div>
+    </div>
+    <!-- <div class="bar bar-calm">
+      <h1 class="title">
+        <button class="button button-full" ng-click="clearAll()">Remove All</button>
+      </h1>
+    </div> -->
+    </br>
+    </br>
+    <ion-footer-bar align-title="center" class="bar-calm" ng-show="things.length" ng-click="clearAll()">
+      <h1 class="title">Remove All</h1>
+    </ion-footer-bar>
+  </ion-content>
+</ion-view>

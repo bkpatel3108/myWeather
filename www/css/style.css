@@ -1,0 +1,15 @@
+/* Empty. Add your own CSS if you like */
+.custom-icon {
+  font-size: 40px;
+  color : red;
+  padding-vertical : 0px;
+}
+
+#content{
+  width: -webkit-max-content;
+  width: max-content;
+}
+
+.item1{
+  float:left;
+}
